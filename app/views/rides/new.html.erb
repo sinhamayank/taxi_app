@@ -1,0 +1,5 @@
+<%= form_tag( request_ride_path(format: "json"), :method =>"POST" ) do %>
+  <%= label_tag(:id, "Customer Id") %>: 
+  <%= text_field_tag :sys_id %><br/><br/>       
+  <%= submit_tag "Ride Now" %>
+<% end %>
