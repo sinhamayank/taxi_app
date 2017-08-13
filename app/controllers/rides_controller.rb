@@ -1,6 +1,6 @@
 class RidesController < ApplicationController
 
-  before_action :check_if_sys_id_present, only: [ :create ]
+  before_action :find_or_create_customer, only: [ :create ]
   before_action :check_if_rides_available, only: [ :create ]
 
   def new
@@ -8,8 +8,7 @@ class RidesController < ApplicationController
 
   def create
     begin
-      customer = Customer.find_or_create_by( sys_id: params[:sys_id] )
-      ride = customer.rides.create( status: "waiting", request_time: Time.now )
+      ride = @customer.rides.create( status: "waiting", request_time: Time.now )
 
       respond_to do |format|
         format.json { render :json => { :success => true, :status => 200 } }
@@ -22,8 +21,12 @@ class RidesController < ApplicationController
     end 
   end
 
-  def check_if_sys_id_present
-    render :json => { :success => false, :user_message => "Please enter customer id", :status => 400 } if params[:sys_id].blank?  
+  def find_or_create_customer
+    if params[:sys_id].present?
+      @customer = Customer.find_or_create_by( sys_id: params[:sys_id] )
+    else
+      render :json => { :success => false, :user_message => "Please enter customer id", :status => 400 } 
+    end
   end
 
   def check_if_rides_available
