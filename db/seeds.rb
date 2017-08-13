@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+#creating the default drivers
+(1..5).each do |sys_id|
+  Driver.create(sys_id: sys_id)
+end
