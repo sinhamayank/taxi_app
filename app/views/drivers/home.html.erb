@@ -1,0 +1,76 @@
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<% if @driver.present? %>
+  <h3><button type="button" style="background-color: #4CAF50"><b><%= link_to "Refresh", driver_home_path(id: @driver.id) %></b></button></h3>
+  <% if @rides.present? %>
+    <% if @rides["waiting"].present? %>
+      <div>
+        <h3><%= "Waiting Rides" %></h3>
+          <table border="1">
+            <tr>
+              <td><b>Req Id</b></td>
+              <td><b>Cust Id</b></td>
+              <td><b>Request Time</b></td>
+              <td><b>Action</b></td>
+            </tr>
+            <% @rides["waiting"].each do |ride| %>
+              <tr>
+                <td>Req Id: <%= ride.id %></td>
+                <td>Cust Id: <%= ride.customer.sys_id %></td>
+                <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
+                <td><%= link_to "Select", accept_ride_path(id: @driver.id, ride_id: ride.id), method: :post %>
+              </tr>
+            <% end %>
+          </table>
+      </div>
+    <% end %>
+
+    <% if @rides["ongoing"].present? %>
+      <div>
+        <h3><%= "Ongoing Rides" %></h3>
+          <table border="1">
+            <tr>
+              <td><b>Req Id</b></td>
+              <td><b>Cust Id</b></td>
+              <td><b>Request Time</b></td>
+              <td><b>Picked Up</b></td>
+            </tr>
+            <% @rides["ongoing"].each do |ride| %>
+              <tr>
+                <td>Req Id: <%= ride.id %></td>
+                <td>Cust Id: <%= ride.customer.sys_id %></td>
+                <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
+                <td><%= "#{((Time.now - ride.pickup_time)/60).to_i} min ago" %></td>
+              </tr>
+            <% end %>
+          </table>
+      </div>
+    <% end %>
+
+    <% if @rides["complete"].present? %>
+      <div>
+        <h3><%= "Complete Rides" %></h3>
+          <table border="1">
+            <tr>
+              <td><b>Req Id</b></td>
+              <td><b>Cust Id</b></td>
+              <td><b>Request Time</b></td>
+              <td><b>Picked Up</b></td>
+              <td><b>Completed</b></td>
+            </tr>
+            <% @rides["complete"].each do |ride| %>
+              <tr>
+                <td>Req Id: <%= ride.id %></td>
+                <td>Cust Id: <%= ride.customer.sys_id %></td>
+                <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
+                <td><%= "#{((Time.now - ride.pickup_time)/60).to_i} min ago" %></td>
+                <td><%= "#{((Time.now - ride.pickup_time)/60).to_i - 5} min ago" %></td>
+              </tr>
+            <% end %>
+          </table>
+      </div>
+    <% end %>
+
+  <% end %>
+<% end %>

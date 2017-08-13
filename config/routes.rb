@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get '/customerapp.html', to: 'rides#new'
   post 'request_ride', to: 'rides#create'
 
+  get '/driverapp.html', to: 'drivers#home', as: "driver_home"
+  post '/accept_ride', to: 'drivers#accept_ride'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
