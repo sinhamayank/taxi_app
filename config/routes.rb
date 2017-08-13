@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/', to: redirect('/customerapp.html')
+  get '/', to: "rides#index"
   
   get '/customerapp.html', to: 'rides#new'
   post 'request_ride', to: 'rides#create'

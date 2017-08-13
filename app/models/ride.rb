@@ -9,4 +9,8 @@ class Ride < ActiveRecord::Base
     Ride.select("id, customer_id, request_time, pickup_time, status").where("driver_id IS NULL OR driver_id = ?", driver_id).includes(:customer).group_by(&:status)
   end
 
+  def self.fetch_all_rides
+    Ride.select("id, customer_id, request_time, pickup_time, status").includes(:customer).group_by(&:status)
+  end
+
 end

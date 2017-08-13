@@ -3,6 +3,11 @@ class RidesController < ApplicationController
   before_action :find_or_create_customer, only: [ :create ]
   before_action :check_if_rides_available, only: [ :create ]
 
+  def index
+    #TODO - Pagination
+    @rides = Ride.fetch_all_rides
+  end
+
   def new
   end
 
