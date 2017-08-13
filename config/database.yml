@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password:
+  password: india
   socket: /tmp/mysql.sock
 
 development:
@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: taxi_app_production
-  username: taxi_app
-  password: <%= ENV['TAXI_APP_DATABASE_PASSWORD'] %>
+  username: root
+  password: india
