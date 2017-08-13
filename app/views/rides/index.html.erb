@@ -8,31 +8,37 @@
       <td><b>Status</b></td>
     </tr>
 
-    <% @rides["waiting"].each do |ride| %>
-      <tr>
-        <td><%= ride.id %></td>
-        <td><%= ride.customer.sys_id %></td>
-        <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
-        <td style="color:red"><%= ride.status %>
-      </tr>
+    <% if @rides["waiting"].present? %>
+      <% @rides["waiting"].each do |ride| %>
+        <tr>
+          <td><%= ride.id %></td>
+          <td><%= ride.customer.sys_id %></td>
+          <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
+          <td style="color:red"><%= ride.status %>
+        </tr>
+      <% end %>
     <% end %>
 
-    <% @rides["ongoing"].each do |ride| %>
-      <tr>
-        <td><%= ride.id %></td>
-        <td><%= ride.customer.sys_id %></td>
-        <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
-        <td style="color:green"><%= ride.status %>
-      </tr>
+    <% if @rides["ongoing"].present? %>
+      <% @rides["ongoing"].each do |ride| %>
+        <tr>
+          <td><%= ride.id %></td>
+          <td><%= ride.customer.sys_id %></td>
+          <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
+          <td style="color:green"><%= ride.status %>
+        </tr>
+      <% end %>
     <% end %>
 
-    <% @rides["complete"].each do |ride| %>
-      <tr>
-        <td><%= ride.id %></td>
-        <td><%= ride.customer.sys_id %></td>
-        <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
-        <td style="color:blue"><%= ride.status %>
-      </tr>
+    <% if @rides["complete"].present? %>
+      <% @rides["complete"].each do |ride| %>
+        <tr>
+          <td><%= ride.id %></td>
+          <td><%= ride.customer.sys_id %></td>
+          <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
+          <td style="color:blue"><%= ride.status %>
+        </tr>
+      <% end %>
     <% end %>
 
   </table>
