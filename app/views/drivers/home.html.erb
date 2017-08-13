@@ -16,8 +16,8 @@
             </tr>
             <% @rides["waiting"].each do |ride| %>
               <tr>
-                <td>Req Id: <%= ride.id %></td>
-                <td>Cust Id: <%= ride.customer.sys_id %></td>
+                <td><%= ride.id %></td>
+                <td><%= ride.customer.sys_id %></td>
                 <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
                 <td><%= link_to "Select", accept_ride_path(id: @driver.id, ride_id: ride.id), method: :post %>
               </tr>
@@ -38,8 +38,8 @@
             </tr>
             <% @rides["ongoing"].each do |ride| %>
               <tr>
-                <td>Req Id: <%= ride.id %></td>
-                <td>Cust Id: <%= ride.customer.sys_id %></td>
+                <td><%= ride.id %></td>
+                <td><%= ride.customer.sys_id %></td>
                 <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
                 <td><%= "#{((Time.now - ride.pickup_time)/60).to_i} min ago" %></td>
               </tr>
@@ -61,8 +61,8 @@
             </tr>
             <% @rides["complete"].each do |ride| %>
               <tr>
-                <td>Req Id: <%= ride.id %></td>
-                <td>Cust Id: <%= ride.customer.sys_id %></td>
+                <td><%= ride.id %></td>
+                <td><%= ride.customer.sys_id %></td>
                 <td><%= "#{((Time.now - ride.request_time)/60).to_i} min ago" %></td>
                 <td><%= "#{((Time.now - ride.pickup_time)/60).to_i} min ago" %></td>
                 <td><%= "#{((Time.now - ride.pickup_time)/60).to_i - 5} min ago" %></td>
